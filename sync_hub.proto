@@ -1,0 +1,32 @@
+syntax = "proto3";
+import public "global_options.proto";
+
+option go_package="./;proto";
+option java_package = "org.liquibase.grpc.proto";
+option java_multiple_files = true;
+option java_outer_classname = "SyncHubProto";
+
+package liquibase;
+
+service SyncHubService {
+  rpc execute(SyncHubRequest) returns (Response) {}
+}
+
+/* Synchronize the local DatabaseChangeLog table with Liquibase Hub */
+message SyncHubRequest {
+  optional string changelog_file = 1; // The root changelog
+  optional string default_catalog_name = 2; // The default catalog name to use for the database connection
+  optional string default_schema_name = 3; // The default schema name to use for the database connection
+  optional string driver = 4; // The JDBC driver class
+  optional string driver_properties_file = 5; // The JDBC driver properties file
+  optional string hub_connection_id = 6; // Used to identify the specific Connection in which to record or extract data at Liquibase Hub. Available in your Liquibase Hub Project at https://hub.liquibase.com.
+  optional string hub_project_id = 7; // Used to identify the specific Project in which to record or extract data at Liquibase Hub. Available in your Liquibase Hub account at https://hub.liquibase.com.
+  optional string password = 8; // Password to use to connect to the database
+  string url = 9; // *required* The JDBC database connection URL
+  optional string username = 10; // Username to use to connect to the database
+  liquibase.GlobalOptions global_options = 11;
+}
+
+message Response {
+  string message = 1;
+}
