@@ -6,7 +6,7 @@ Synchronize the local DatabaseChangeLog table with Liquibase Hub
 ```yaml
 steps:
 - uses: actions/checkout@v3
-- uses: liquibase-github-actions/sync-hub@v4.17.2
+- uses: liquibase-github-actions/sync-hub@v4.18.0
   with:
     # The JDBC database connection URL
     # string
@@ -70,7 +70,7 @@ The liquibase sync hub action accepts all valid liquibase global options as opti
 ```yaml
 steps:
   - uses: actions/checkout@v3
-  - uses: liquibase-github-actions/sync-hub@v4.17.2
+  - uses: liquibase-github-actions/sync-hub@v4.18.0
     with:
       url: ""
       headless: true
